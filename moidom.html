@@ -1,0 +1,413 @@
+﻿<!DOCTYPE html>
+
+<!-- Катерина Георгиева, група 5, ф.н. 82235 -->
+
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<script src="three.min.js"></script>
+		<script src="OrbitControls.js"></script>
+		<script src="CSG.js"></script>
+	</head>
+	
+	<body>
+		<script>
+			const FN = 82235; // факултетен номер 
+		</script>
+		
+		<script src="init.js"></script>
+			
+		<script>
+			// изграждане на стените, врати и прозорци
+			var walls = new THREE.Group();
+			var material = new THREE.MeshPhongMaterial( {color:'rgb(255,229,180)', shininess: 100} );
+
+			var geometry = new THREE.Mesh(new THREE.BoxGeometry( 0.2, 4, 6 )); 
+
+			var door1 = new THREE.Mesh(new THREE.BoxGeometry( 0.2, 2.5, 2.5 ));
+			door1.position.set(0, -0.7, 0);
+
+			var csg = new CSG();
+			csg.subtract([geometry, door1]);
+
+			var wall1 = csg.toMesh();
+			wall1.material = material;
+
+			var wall2 = new THREE.Mesh(new THREE.BoxGeometry( 1, 4, 0.2 ), material);
+			var wall3 = new THREE.Mesh(new THREE.BoxGeometry( 1, 4, 0.2 ), material);
+			var wall4 = new THREE.Mesh(new THREE.BoxGeometry( 0.2, 4, 2.2), material);
+			geometry = new THREE.Mesh(new THREE.BoxGeometry( 7, 4, 0.2), material);
+			var window5 = new THREE.Mesh(new THREE.BoxGeometry(2.5 , 2, 0.2 ));
+
+			csg = new CSG();
+			csg.subtract([geometry, window5]);
+
+			var wall5 = csg.toMesh();
+			wall5.material = material;
+
+			var wall6 = new THREE.Mesh(new THREE.BoxGeometry( 0.2, 4, 2.2), material);
+			geometry = new THREE.Mesh(new THREE.BoxGeometry( 7, 4, 0.2), material);
+			var window10 = new THREE.Mesh(new THREE.BoxGeometry(2.5 , 2, 0.2 ));
+
+			csg = new CSG();
+			csg.subtract([geometry, window10]);
+
+			var wall10 = csg.toMesh();
+			wall10.material = material;
+			var wall11 = new THREE.Mesh(new THREE.BoxGeometry( 0.2, 4, 6.2), material);
+			geometry = new THREE.Mesh(new THREE.BoxGeometry( 0.2, 4, 6.2), material);
+			var window12 = new THREE.Mesh(new THREE.BoxGeometry(0.2 , 2, 2.5));
+
+			csg = new CSG();
+			csg.subtract([geometry, window12]);
+
+			var wall12 = csg.toMesh();
+			wall12.material = material;
+
+			//inner walls
+			geometry = new THREE.Mesh(new THREE.BoxGeometry(7, 4, 0.2), material);
+			var door13 = new THREE.Mesh(new THREE.BoxGeometry(1.5, 2.8, 0.2));
+			door13.position.set(-1, -0.8, 0);
+
+			csg = new CSG();
+			csg.subtract([geometry, door13]);
+
+			var wall13 = csg.toMesh();
+			wall13.material = material;
+
+			geometry = new THREE.Mesh(new THREE.BoxGeometry(9.4, 4, 0.2), material);
+			var door14 = new THREE.Mesh(new THREE.BoxGeometry(1.5, 2.8, 0.2));
+			door14.position.set(0, -0.8, 0);
+
+			csg = new CSG();
+			csg.subtract([geometry, door14]);
+
+			var wall14 = csg.toMesh();
+			wall14.material = material;
+			geometry = new THREE.Mesh(new THREE.BoxGeometry(0.2, 4, 3.6), material);
+			var door15 = new THREE.Mesh(new THREE.BoxGeometry(0.2, 2.8, 1.5));
+			door15.position.set(0, -0.8, 0);
+
+			csg = new CSG();
+			csg.subtract([geometry, door15]);
+
+			var wall15 = csg.toMesh();
+			wall15.material = material;
+			var wall16 = new THREE.Mesh(new THREE.BoxGeometry(3, 4, 0.2), material); 
+
+			material = new THREE.MeshPhongMaterial( {color:'rgb(173,216,230)', transparent: true, opacity: 0.75} );
+
+			//френски прозорци, добавила съм ги, защото мисля, че няма да си личи, че са прозорци, ако ги няма 
+			var wall7 = new THREE.Mesh(new THREE.BoxGeometry( 2, 4, 0.2 ), material);
+			var wall8 = new THREE.Mesh(new THREE.BoxGeometry( 0.2, 4, 6 ), material);
+			var wall9 = new THREE.Mesh(new THREE.BoxGeometry( 2, 4, 0.2 ), material);			
+
+			wall1.position.set( 3, 2, -1);
+			wall1.receiveShadow = true;
+			wall1.castShadow = true;
+
+			wall2.position.set( 2.6, 2, 2);
+			wall2.receiveShadow = true;
+			wall2.castShadow = true;
+			
+			wall3.position.set(2.6, 2, -4);
+			wall3.receiveShadow = true;
+			wall3.castShadow = true;
+
+			wall4.position.set(2, 2, -5);
+			wall4.receiveShadow = true;
+			wall4.castShadow = true;
+			
+			wall5.position.set(-1.5, 2, -6);
+			wall5.receiveShadow = true;
+			wall5.castShadow = true;
+			
+			wall6.position.set(-5, 2, -5);
+			wall6.receiveShadow = true;
+			wall6.castShadow = true;
+
+			wall7.position.set(-6.1, 2, -4);
+			wall7.receiveShadow = true;
+			wall7.castShadow = true;
+
+			wall8.position.set(-7, 2, -1);
+			wall8.receiveShadow = true;
+			wall8.castShadow = true;
+
+			wall9.position.set( -6.1, 2, 2);
+			wall9.receiveShadow = true;
+			wall9.castShadow = true;
+
+			wall10.position.set(-1.5, 2, 8);
+			wall10.receiveShadow = true;
+			wall10.castShadow = true;
+
+			wall11.position.set(2, 2, 5);
+			wall11.receiveShadow = true;
+			wall11.castShadow = true;
+
+			wall12.position.set(-5, 2, 5);
+			wall12.receiveShadow = true;
+			wall12.castShadow = true;
+
+			wall13.position.set(-1.5, 2, 2);
+			wall13.receiveShadow = true;
+			wall13.castShadow = true;
+
+			wall14.position.set(-1.5, 2, -1.1);
+			wall14.rotateY(Math.PI / 4.4);
+			wall14.receiveShadow = true;
+			wall14.castShadow = true;
+
+			wall15.position.set(-1, 2, 3.8);
+			wall15.receiveShadow = true;
+			wall15.castShadow = true;
+
+			wall16.position.set(0.5, 2, 5.5);
+			wall16.receiveShadow = true;
+			wall16.castShadow = true;
+
+			walls.add(wall1);
+			walls.add(wall2);
+			walls.add(wall3);
+			walls.add(wall4);
+			walls.add(wall5);
+			walls.add(wall6);
+			walls.add(wall7);
+			walls.add(wall8);
+			walls.add(wall9);
+			walls.add(wall10);
+			walls.add(wall11);
+			walls.add(wall12);
+			// inner walls
+			walls.add(wall13);
+			walls.add(wall14);
+			walls.add(wall15);
+			walls.add(wall16);
+			scene.add(walls);
+
+
+
+			// щанга
+			// пръчка за щангата
+			var barbell =  new THREE.Group();
+			geometry = new THREE.CylinderGeometry( 0.03, 0.03, 2, 32 );
+			material = new THREE.MeshBasicMaterial({color: '#333333'});
+			var stick = new THREE.Mesh(geometry, material);
+			//stick.position.set(0, 1, 0);
+			stick.rotateZ(Math.PI / 2);
+
+			// диск, 25кг, ляв
+			var disk_25kg_left = new THREE.Group();
+			geometry = new THREE.CylinderGeometry(0.3, 0.3, 0.05, 32);
+			material = new THREE.MeshBasicMaterial({color: '#41424C'});
+			var disk_outer = new THREE.Mesh(geometry, material);
+			disk_outer.rotateZ(Math.PI / 2);
+			geometry = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 0.05, 32));
+			geometry.rotateZ(Math.PI / 2);
+			
+			csg = new CSG();
+			csg.subtract([disk_outer, geometry]);
+			var temp_disk = csg.toMesh();
+			
+
+			geometry = new THREE.CylinderGeometry(0.2, 0.2, 0.05, 32);
+			material = new THREE.MeshBasicMaterial({color: 'red'});
+			var disk_red = new THREE.Mesh(geometry, material);
+			disk_red.rotateZ(Math.PI / 2);
+			
+			//disk_red.position.set(0, 1, 0);
+			//temp_disk.position.set(0, 1, 0);
+			
+			disk_25kg_left.add(disk_red);
+			disk_25kg_left.add(temp_disk);
+
+			disk_25kg_left.position.set(0.6, 0, 0);
+
+			// диск, 25кг, десен
+			var disk_25kg_right = new THREE.Group();
+			geometry = new THREE.CylinderGeometry(0.3, 0.3, 0.05, 32);
+			material = new THREE.MeshBasicMaterial({color: '#41424C'});
+			var disk_outer = new THREE.Mesh(geometry, material);
+			disk_outer.rotateZ(Math.PI / 2);
+			geometry = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 0.05, 32));
+			geometry.rotateZ(Math.PI / 2);
+			
+			csg = new CSG();
+			csg.subtract([disk_outer, geometry]);
+			var temp_disk = csg.toMesh();
+			
+
+			geometry = new THREE.CylinderGeometry(0.2, 0.2, 0.05, 32);
+			material = new THREE.MeshBasicMaterial({color: 'red'});
+			var disk_red = new THREE.Mesh(geometry, material);
+			disk_red.rotateZ(Math.PI / 2);
+			
+			disk_25kg_right.add(disk_red);
+			disk_25kg_right.add(temp_disk);
+
+			disk_25kg_right.position.set(-0.6, 0, 0);
+
+			// диск, 20кг, ляв
+			var disk_20kg_left = new THREE.Group();
+			geometry = new THREE.CylinderGeometry(0.2, 0.2, 0.05, 32);
+			material = new THREE.MeshBasicMaterial({color: '#41424C'});
+			var disk_outer = new THREE.Mesh(geometry, material);
+			disk_outer.rotateZ(Math.PI / 2);
+			geometry = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.05, 32));
+			geometry.rotateZ(Math.PI / 2);
+			
+			csg = new CSG();
+			csg.subtract([disk_outer, geometry]);
+			var temp_disk = csg.toMesh();
+			
+
+			geometry = new THREE.CylinderGeometry(0.1, 0.1, 0.05, 32);
+			material = new THREE.MeshBasicMaterial({color: 'blue'});
+			var disk_blue = new THREE.Mesh(geometry, material);
+			disk_blue.rotateZ(Math.PI / 2);
+			
+			disk_20kg_left.add(disk_blue);
+			disk_20kg_left.add(temp_disk);
+
+			disk_20kg_left.position.set(0.7, 0, 0);
+
+			// 
+			var disk_20kg_right = new THREE.Group();
+			geometry = new THREE.CylinderGeometry(0.2, 0.2, 0.05, 32);
+			material = new THREE.MeshBasicMaterial({color: '#41424C'});
+			var disk_outer = new THREE.Mesh(geometry, material);
+			disk_outer.rotateZ(Math.PI / 2);
+			geometry = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 0.05, 32));
+			geometry.rotateZ(Math.PI / 2);
+			
+			csg = new CSG();
+			csg.subtract([disk_outer, geometry]);
+			var temp_disk = csg.toMesh();
+			
+
+			geometry = new THREE.CylinderGeometry(0.1, 0.1, 0.05, 32);
+			material = new THREE.MeshBasicMaterial({color: 'blue'});
+			var disk_blue = new THREE.Mesh(geometry, material);
+			disk_blue.rotateZ(Math.PI / 2);
+			
+			//disk_red.position.set(0, 1, 0);
+			//temp_disk.position.set(0, 1, 0);
+			
+			disk_20kg_right.add(disk_blue);
+			disk_20kg_right.add(temp_disk);
+
+			disk_20kg_right.position.set(-0.7, 0, 0);
+
+			barbell.rotateY(Math.PI / 3);
+			barbell.position.set(-4, 0.30, -3);
+			barbell.add(disk_20kg_right);
+			barbell.add(disk_20kg_left);
+			barbell.add(disk_25kg_left);
+			barbell.add(disk_25kg_right);
+			barbell.add(stick);
+			
+			scene.add(barbell);
+			//много щанги
+			function randomNumber(min, max) { 
+    			return Math.random() * (max - min) + min;
+			}
+
+			for(var i = 0; i < 10; i++){
+				var new_barbell = barbell.clone();
+				new_barbell.position.set(randomNumber(4, 12), 0.5, randomNumber(2, 12));
+				new_barbell.rotateY(Math.random());
+				scene.add(new_barbell);
+			}
+
+			// тоалетна
+			var toilet = new THREE.Group();
+
+			geometry = new THREE.ConeGeometry(0.7, 0.5, 64);
+			material = new THREE.MeshPhongMaterial({color: 'silver' , side: THREE.DoubleSide});
+			var bottom = new THREE.Mesh(geometry, material);
+			geometry = new THREE.ConeGeometry(0.5, 0.05, 64);
+			var bottom2 = new THREE.Mesh(geometry, material);
+			//bottom2.position.set(0, 0, 0.2);
+			geometry = new THREE.CylinderGeometry(0.15, 0.15, 1.2, 32);
+			var tube = new THREE.Mesh(geometry, material);
+
+			
+			var points = [];
+			for ( var deg = 0; deg <= 180; deg += 6 ) {
+				var rad = Math.PI * deg / 180;
+				// уравнение за яйцевидна форма
+    			var point = new THREE.Vector2(((0.72 + .08 * Math.cos(rad)) * Math.sin(rad) ) / 2, - Math.cos(rad) / 2); 
+    			points.push( point );
+
+			}
+
+			geometry = new THREE.LatheGeometry( points, 32, 0, 3.2);
+
+			var pot = new THREE.Mesh( geometry, new THREE.MeshPhongMaterial( {specular: 'linen', side: THREE.DoubleSide} ) );
+			
+
+			pot.position.set(0, 0.85, -0.1);
+			pot.rotateZ(Math.PI / 2); 
+			pot.rotateY(Math.PI);
+			pot.rotateX(Math.PI / 2);
+			toilet.add(pot);
+
+			var x = 0, y = 0;
+
+			var cover_shape = new THREE.Shape();
+
+
+			cover_shape.moveTo(x, y + 0.312);
+			cover_shape.bezierCurveTo(x + 0.5, y + 0.043, x + 0.5, y - 0.043, x, y - 0.312);
+			cover_shape.bezierCurveTo(x, y - 0.312, x - 0.153, y - 0.5, x - 0.5, y );
+			cover_shape.bezierCurveTo( x - 0.5, y, x - 0.153, y + 0.5, x, y + 0.312);
+
+			var extrudeSettings = {depth: 0.05, bevelEnabled: true, bevelSegments: 0, steps: 2, bevelSize: 0.1, bevelThickness: 0.1};
+			geometry = new THREE.ExtrudeGeometry( cover_shape, extrudeSettings );
+			material = new THREE.MeshPhongMaterial( {color: 'silver' , side: THREE.DoubleSide} );
+			var cover = new THREE.Mesh( geometry, material ) ;
+			cover.rotateZ(Math.PI / 2);
+			cover.rotateY(Math.PI / 2);
+			cover.position.set(0, 0.85, -0.15);
+			toilet.add(cover);
+
+			var shape = new THREE.Shape();
+			shape.moveTo(x, y);
+			shape.lineTo(x, y+0.5);
+			shape.lineTo(x+0.7, y+0.5);
+			shape.lineTo(x+0.7, y);
+			shape.lineTo(x, y);
+
+			var extrudeSettings = {depth: 0.2, bevelEnabled: true, bevelSegments: 4, steps: 2, bevelSize: 0.1, bevelThickness: 0.1};
+			geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
+			material = new THREE.MeshPhongMaterial( {color: 'silver' , side: THREE.DoubleSide} );
+			var toilet_cistern = new THREE.Mesh( geometry, material ) ;
+			toilet.add(toilet_cistern);
+			toilet_cistern.position.set(-0.35, 1, 0.5);
+
+			var final_button = new THREE.Group();
+			geometry = new THREE.CylinderGeometry(0.05, 0.05, 0.45, 32);
+			material = new THREE.MeshPhongMaterial( {color: '#41424C' , side: THREE.DoubleSide} );
+			var button = new THREE.Mesh( geometry, material );
+			final_button.add(button);
+			geometry = new THREE.TorusGeometry(0.05, 0.009, 8, 100);
+			var ring = new THREE.Mesh(geometry, material);
+			ring.position.set(0, 0.2, 0); 
+			ring.rotateX(Math.PI / 2);
+			final_button.add(ring);
+			final_button.position.set(0, 1.4, 0.6);
+
+			toilet.add(final_button);
+			toilet.add(tube);
+			toilet.add(bottom);
+			toilet.position.set(1, 0, 4.5);
+			toilet.rotateY(Math.PI/4);
+			
+			scene.add(toilet);
+		</script>
+		
+	</body>
+</html>
+
+
